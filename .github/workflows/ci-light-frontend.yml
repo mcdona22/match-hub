@@ -30,7 +30,7 @@ jobs:
         with:
           node-version: "20"
           cache: "npm"
-          cache-dependency-path: "package-lock.json"
+          cache-dependency-path: "apps/match-hub-ui/package-lock.json"
 
       - name: Install Dependencies
         # Uses npm ci for clean, locked installations in CI
