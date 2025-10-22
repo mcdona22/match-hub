@@ -1,0 +1,47 @@
+name: 💡 Match-Hub-UI Push - Light CI
+
+on:
+  push:
+    branches:
+      - "**" # Match all branches
+      - "!main" # Exclude the main branch (which runs the CD pipeline)
+    paths:
+      - "apps/match-hub-ui/**"
+      - "package.json"
+      - "package-lock.json"
+
+# CONCURRENCY: Ensures only the latest commit on a branch is processed, cancelling older runs.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend-build:
+    name: Verify Build Success (Match-Hub-UI)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # CACHING: Caches node_modules based on the lock file content for speed.
+      - name: Setup Node and Cache Dependencies
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: "package-lock.json"
+
+      - name: Install Dependencies
+        # Uses npm ci for clean, locked installations in CI
+        run: npm ci
+
+      - name: Build Match-Hub-UI (Frontend)
+        # A successful production build confirms compilation and configuration integrity.
+        # NOTE: This assumes 'npm run build -- --project=match-hub-ui --configuration=production'
+        # is a valid command defined in your package.json scripts.
+        run: npm run build -- --project=match-hub-ui --configuration=production
+        working-directory: apps/match-hub-ui
+
+      - name: Simple Build Success Message
+        run: echo "✅ Match-Hub-UI build check passed quickly."
