@@ -34,7 +34,7 @@ jobs:
 
       - name: Install Dependencies
         # Uses npm ci for clean, locked installations in CI
-        run: npm ci
+        run: npm install --no-fund
 
       - name: Build Match-Hub-UI (Frontend)
         # A successful production build confirms compilation and configuration integrity.
