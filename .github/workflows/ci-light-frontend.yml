@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
 
       # CACHING: Caches node_modules based on the lock file content for speed.
-      - name: Setup Node and Cache Dependencies
+      - name: Setup Node and Cache Dependencies for build
         uses: actions/setup-node@v4
         with:
           node-version: "20"
