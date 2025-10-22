@@ -3,12 +3,12 @@ name: 💡 Match-Hub-UI Push - Light CI
 on:
   push:
     branches:
-      - '**'          # Match all branches
-      - '!main'       # Exclude the main branch (which runs the CD pipeline)
+      - "**" # Match all branches
+      - "!main" # Exclude the main branch (which runs the CD pipeline)
     paths:
-      - 'apps/match-hub-ui/**'
-      - 'package.json'
-      - 'package-lock.json'
+      - "apps/match-hub-ui/**"
+      - "package.json"
+      - "package-lock.json"
 
 # CONCURRENCY: Ensures only the latest commit on a branch is processed, cancelling older runs.
 concurrency:
@@ -28,13 +28,17 @@ jobs:
       - name: Setup Node and Cache Dependencies
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
           # REMOVED: cache: 'npm' was causing the root package.json ENOENT error
-          cache-dependency-path: 'apps/match-hub-ui/package-lock.json'
+          cache-dependency-path: "apps/match-hub-ui/package-lock.json"
 
       - name: Install Dependencies
         # Using 'npm install' to bypass strict lock file checks
         run: npm install --no-fund
+        working-directory: apps/match-hub-ui
+
+      - name: Test Match-Hub-UI (Frontend)
+        run: npm run test -- --watch=false --browsers=ChromeHeadless
         working-directory: apps/match-hub-ui
 
       - name: Build Match-Hub-UI (Frontend)
