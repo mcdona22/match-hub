@@ -45,6 +45,8 @@ jobs:
         # This uses your defined script: "npm run build && npm run serve-and-test"
         # Since this includes the build, the separate build step is removed.
         run: npm run e2e
+        working-directory: apps/match-hub-ui
+
 
       - name: Simple Build Success Message
         run: echo "✅ Match-Hub-UI build check passed quickly."
