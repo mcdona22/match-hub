@@ -58,6 +58,6 @@ jobs:
           ls -la
           echo ""
           echo "--- Files in the generated 'reports' directory ---"
-          ls -la aps/match-hub/code-coverage
+          ls -la apps/match-hub-ui
       - name: Simple Build Success Message
         run: echo "✅ Match-Hub-UI build check passed quickly."

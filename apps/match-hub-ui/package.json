@@ -12,6 +12,7 @@
     "test": "ng test --no-watch --browsers=ChromeHeadless",
     "test:ui": "ng test",
     "test:e2e": "npm run build && npm run serve-and-test",
+    "test:full-bak": "npm run test && echo 'Success'",
     "test:full": "npm run test && npm run test:e2e && echo 'Success'",
     "serve-and-test": "start-server-and-test start:e2e http://localhost:4300 cypress:run"
   },
