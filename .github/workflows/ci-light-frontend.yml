@@ -55,9 +55,12 @@ jobs:
       - name: List files in the current directory and reports folder
         run: |
           echo "--- Files in current working directory (\$GITHUB_WORKSPACE) ---"
+          pwd
           ls -la
           echo ""
-          echo "--- Files in the generated 'reports' directory ---"
-          ls -la apps/match-hub-ui
+          echo "--- Files in the generated app root directory ---"
+          ls -la apps/match-hub-ui          
+          echo "--- Files in the generated 'coverage' directory ---"
+          ls -la apps/match-hub-ui/coverage
       - name: Simple Build Success Message
         run: echo "✅ Match-Hub-UI build check passed quickly."
