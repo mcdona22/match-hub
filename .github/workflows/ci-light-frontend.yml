@@ -37,14 +37,9 @@ jobs:
         run: npm install --no-fund
         working-directory: apps/match-hub-ui
 
-      - name: Test Match-Hub-UI (Frontend)
-        run: npm run test -- --watch=false --browsers=ChromeHeadless
-        working-directory: apps/match-hub-ui
-
-      - name: 🚀 Run Cypress E2E (Includes Build and Serve)
-        # This uses your defined script: "npm run build && npm run serve-and-test"
-        # Since this includes the build, the separate build step is removed.
-        run: npm run e2e
+      - name: 🧪 Run All Tests (Unit & E2E)
+        # This new command chains the unit tests (headless) and the E2E tests (which includes build/serve)
+        run: npm run test:full
         working-directory: apps/match-hub-ui
 
 
