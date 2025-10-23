@@ -49,7 +49,7 @@ jobs:
           # FINAL FIX: Using the exact sub-folder name that the CLI creates.
           # Since the working-directory is apps/match-hub-ui, this path
           # correctly resolves to apps/match-hub-ui/coverage/match-hub-ui.
-          path: match-hub/apps/match-hub-ui/coverage/match-hub-ui/**
+          path: apps/match-hub-ui/coverage/**
           retention-days: 7
           if-no-files-found: warn
       - name: List files in the current directory and reports folder
