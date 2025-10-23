@@ -52,6 +52,12 @@ jobs:
           path: coverage/match-hub-ui/**
           retention-days: 7
           if-no-files-found: warn
-
+      - name: List files in the current directory and reports folder
+        run: |
+          echo "--- Files in current working directory (\$GITHUB_WORKSPACE) ---"
+          ls -la
+          echo ""
+          echo "--- Files in the generated 'reports' directory ---"
+          ls -la code-coverage
       - name: Simple Build Success Message
         run: echo "✅ Match-Hub-UI build check passed quickly."
