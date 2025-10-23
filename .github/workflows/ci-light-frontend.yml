@@ -48,7 +48,7 @@ jobs:
           name: unit-test-coverage
           # This path is relative to the 'working-directory' (apps/match-hub-ui).
           # It uses the confirmed default output path from the Angular CLI.
-          path: coverage/match-hub-ui
+          path: apps/match-hub-ui/coverage/match-hub-ui
           retention-days: 7
           # Allow the step to warn (instead of fail) if the coverage files weren't produced
           if-no-files-found: warn
