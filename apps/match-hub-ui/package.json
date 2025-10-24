@@ -16,14 +16,20 @@
     "test:full-bak": "npm run test && npm run test:e2e && echo 'Success'",
     "test:push": "npm run test && npm run test:e2e && echo 'Success'",
     "serve-and-test": "start-server-and-test start:e2e http://localhost:4300 cypress:run",
-    "coby": "jest --coverage --coverageReporters=cobertura --coverageDirectory=coverage"
+    "coby": "jest --coverage --coverageReporters=cobertura --coverageDirectory=coverage",
+    "report:clean": "rm -rf cypress/results && rm -rf mochawesome-report",
+    "report:generate": "npm run report:clean && mkdir -p mochawesome-report && cypress run --env mochawesome=true && npm run report:merge",
+    "report:html": "marge mochawesome-report/mochawesome-bundle.json -o mochawesome-report --inline",
+    "report:merge": "mochawesome-merge cypress/results/*.json > mochawesome-report/mochawesome-bundle.json"
   },
   "private": true,
   "dependencies": {
+    "@angular/cdk": "^20.2.10",
     "@angular/common": "^20.0.0",
     "@angular/compiler": "^20.0.0",
     "@angular/core": "^20.0.0",
     "@angular/forms": "^20.0.0",
+    "@angular/material": "^20.2.10",
     "@angular/platform-browser": "^20.0.0",
     "@angular/router": "^20.0.0",
     "rxjs": "~7.8.0",
@@ -43,9 +49,11 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "karma-junit-reporter": "latest",
     "mocha-junit-reporter": "^2.2.1",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.0.0",
     "start-server-and-test": "^2.0.3",
-    "typescript": "~5.8.2",
-    "karma-junit-reporter": "latest"
+    "typescript": "~5.8.2"
   }
 }

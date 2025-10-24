@@ -1,0 +1,40 @@
+mat-sidenav-container, mat-sidenav-content, mat-sidenav {
+  height: 100%;
+}
+
+mat-sidenav {
+  width: 250px;
+}
+
+.app-title {
+  font-size: xx-large;
+  letter-spacing: 0.25rem;
+}
+
+.menu-items {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.flex-spacer {
+  flex: 1;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.my-main-toolbar {
+  /*
+    Set the background color using the Material System Primary color.
+    --mat-sys-primary is the main color from your imported theme.
+  */
+  --mat-toolbar-container-background-color: var(--mat-sys-primary-container);
+
+  /* Set text/icon color to ensure it contrasts with the primary background */
+  --mat-toolbar-container-text-color: var(--mat-sys-on-primary-container);
+}
