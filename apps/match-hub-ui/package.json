@@ -14,7 +14,9 @@
     "test:e2e": "npm run build && npm run serve-and-test",
     "test:full": "npm run test && echo 'Success'",
     "test:full-bak": "npm run test && npm run test:e2e && echo 'Success'",
-    "serve-and-test": "start-server-and-test start:e2e http://localhost:4300 cypress:run"
+    "test:push": "npm run test && npm run test:e2e && echo 'Success'",
+    "serve-and-test": "start-server-and-test start:e2e http://localhost:4300 cypress:run",
+    "coby": "jest --coverage --coverageReporters=cobertura --coverageDirectory=coverage"
   },
   "private": true,
   "dependencies": {
