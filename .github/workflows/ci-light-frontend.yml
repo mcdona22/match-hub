@@ -64,7 +64,7 @@ jobs:
 #          ls -la apps/match-hub-ui/coverage/match-hub-ui
 
       - name: Unit Tests with Jasmine & Karma
-        run: npm run ng-test
+        run: npm run test
         working-directory: apps/match-hub-ui
 
       - name: E2E Tests with Cypress
