@@ -1,0 +1,16 @@
+<p>teams-list works!</p>
+
+
+<div class="data-team-list">
+  {{ teams() | json }}
+</div>
+
+@if (teams().length == 0) {
+  <div class="data-no-teams">
+    No teams here
+
+  </div>
+}
+
+
+
