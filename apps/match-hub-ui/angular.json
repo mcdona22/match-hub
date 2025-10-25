@@ -95,7 +95,7 @@
               "src/main.ts",
               "src/polyfills.ts",
               "src/environments/**"
-            ],
+            ]
           }
         }
       }

@@ -1,0 +1,65 @@
+@use '../../styles/custom-theme-vars' as vars;
+
+
+mat-sidenav-container, mat-sidenav-content, mat-sidenav {
+  height: 100%;
+}
+
+mat-sidenav {
+  width: 250px;
+}
+
+.app-title {
+  font-size: xx-large;
+  letter-spacing: 0.25rem;
+}
+
+.menu-items {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.flex-spacer {
+  flex: 1;
+}
+
+
+.main-toolbar {
+  /*
+    Set the background color using the Material System Primary color.
+    --mat-sys-primary is the main color from your imported theme.
+  */
+  --mat-toolbar-container-background-color: var(--mat-sys-primary-container);
+
+  /* Set text/icon color to ensure it contrasts with the primary background */
+  --mat-toolbar-container-text-color: var(--mat-sys-on-primary-container);
+}
+
+.menu-items > a {
+  /* Hides all <a> elements in the toolbar for mobile */
+  display: none;
+}
+
+.main-toolbar .menu-items > button {
+  /* Ensure the button is visible for mobile */
+  display: block;
+}
+
+@media (min-width: vars.$breakpoint-mobile) {
+  .menu-items > a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+  }
+  /* Ensure the button is visible for mobile */
+  .main-toolbar .menu-items > button {
+    /* Hides the button for desktop */
+    display: none;
+  }
+}
+
+

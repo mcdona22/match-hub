@@ -1,14 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'styles/custom-theme-vars' as vars;
+@import "../node_modules/@angular/material/prebuilt-themes/magenta-violet.css";
+
+:root {
+  // Main background color for all surfaces (page, cards, etc.)
+  --mat-sys-surface: #{vars.$custom-dark-surface-color};
+  --mat-sys-background: #{vars.$custom-dark-surface-color};
+
+  // Main text and icon color that sits on the dark background
+  --mat-sys-on-surface: #{vars.$custom-dark-on-surface-color};
+  --mat-sys-on-background: #{vars.$custom-dark-on-surface-color};
+}
 
 html, body {
-  //--mat-sys-background: transparent;
-  background: #00000022;
-  color :#cccccc;
+  font-family: 'Roboto', sans-serif;
   height: 100%;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  //background-image: url('assets/img/blue-waves.jpg');
-  //background-size: cover;
-  //background-position: center;
-  //background-repeat: no-repeat;
-  //background-attachment: fixed;
+
+}
+
+
+body {
+  margin: 0;
+}
+
+.centred-max-width {
+  max-width: vars.$app-max-content-width;
+  margin: 0 auto;
+}
+
+
+.standard-wrapper {
+  padding: 2rem;
+}
+
+
+.debug {
+  border: lightcoral 1px solid;
 }

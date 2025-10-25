@@ -1,0 +1,38 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav
+    [opened]="opened()"
+    mode="over">
+    <h3>
+
+      Sidenav content
+    </h3>
+    <p class="lorem">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab commodi cupiditate distinctio dolore
+      impedit laborum null.</p>
+
+    <p class="lorem">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus commodi cum esse ex id natus
+      porro rem temporibus! Deserunt, dolorem error ex excepturi exercitationem fuga incidunt ipsa laboriosam molestiae
+    </p>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="main-toolbar">
+      <div class="menu-items centred-max-width">
+
+        <!--        <div>LOGO</div>-->
+        <div class="app-title">Match Hub</div>
+        <div class="flex-spacer"></div>
+
+        <a class="data-link-teams" routerLink="/teams">Teams</a>
+        <a class="data-link-calender" routerLink="/calendar">Calender</a>
+        <button (click)="toggleOpened()" mat-icon-button>
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+    <main>
+
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
