@@ -14,8 +14,8 @@ describe('Main App Page', () => {
 
   describe('Check app scaffold components', () => {
     const items = [
-      { class: '.data-link-teams', value: 'TeamsService' },
-      { class: '.data-link-calender', value: 'Calender' },
+      { class: '.data-link-teams', value: 'Teams' },
+      { class: '.data-link-calendar', value: 'Calendar' },
     ];
 
     for (const item of items) {
