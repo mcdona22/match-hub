@@ -22,13 +22,8 @@ mat-sidenav {
   flex: 1;
 }
 
-a {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-}
 
-.my-main-toolbar {
+.main-toolbar {
   /*
     Set the background color using the Material System Primary color.
     --mat-sys-primary is the main color from your imported theme.
@@ -38,3 +33,30 @@ a {
   /* Set text/icon color to ensure it contrasts with the primary background */
   --mat-toolbar-container-text-color: var(--mat-sys-on-primary-container);
 }
+
+.menu-items > a {
+  /* Hides all <a> elements in the toolbar for mobile */
+  display: none;
+}
+
+.main-toolbar .menu-items > button {
+  /* Ensure the button is visible for mobile */
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .menu-items > a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+  }
+  /* Ensure the button is visible for mobile */
+  .main-toolbar .menu-items > button {
+    /* Hides the button for desktop */
+    display: none;
+  }
+}
+
+
