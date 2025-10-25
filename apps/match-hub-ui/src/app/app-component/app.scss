@@ -1,3 +1,6 @@
+@use '../../styles/custom-theme-vars' as vars;
+
+
 mat-sidenav-container, mat-sidenav-content, mat-sidenav {
   height: 100%;
 }
@@ -44,7 +47,7 @@ mat-sidenav {
   display: block;
 }
 
-@media (min-width: 768px) {
+@media (min-width: vars.$breakpoint-mobile) {
   .menu-items > a {
     display: block;
     text-decoration: none;
