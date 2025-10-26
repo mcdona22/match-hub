@@ -1,0 +1,28 @@
+.section-title {
+  font-size: 1.2rem;
+  padding: 1.5rem 0;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.team-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  //border: 1px white solid;
+  padding: 0.5rem;
+  border-radius: 10px;
+
+}
+
+.team {
+  padding: 1rem;
+  border: 1px solid grey;
+  width: 200px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 1.2rem;
+
+
+}
