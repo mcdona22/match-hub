@@ -1,10 +1,9 @@
 import { Component, input } from '@angular/core';
 import { ITeam } from '../../data/i-team';
-import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-teams-list',
-  imports: [JsonPipe],
+  imports: [],
   templateUrl: './teams-list.html',
   styleUrl: './teams-list.scss',
 })

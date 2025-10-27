@@ -1,0 +1,15 @@
+<div class="standard-wrapper centred-max-width data-teams-page">
+  <div class="page-title">Teams</div>
+  <div class="section-title">Current Team List</div>
+
+  @if (!fetchedTeams()) {
+
+    <div class="spinner">
+      <mat-spinner diameter="40" strokeWidth="4"></mat-spinner>
+    </div>
+  } @else {
+    <app-teams-list [teams]="teams()"/>
+  }
+
+
+</div>
