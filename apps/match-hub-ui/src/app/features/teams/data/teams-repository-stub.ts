@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ITeam } from './i-team';
+import { ITeamsRepository } from './I-teams-repository';
 
 const data: ITeam[] = [
   { id: '1', name: 'Nottingham Forest' },
@@ -13,7 +14,7 @@ const data: ITeam[] = [
 @Injectable({
   providedIn: 'root',
 })
-export class TeamsRepository {
+export class TeamsRepositoryStub implements ITeamsRepository {
   delay = 2150;
 
   async readAllTeams(): Promise<ITeam[]> {

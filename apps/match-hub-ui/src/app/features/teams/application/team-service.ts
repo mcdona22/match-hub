@@ -6,7 +6,8 @@ import {
   signal,
   WritableSignal,
 } from '@angular/core';
-import { TeamsRepository } from '../data/teams-repository';
+import { TeamsRepositoryStub } from '../data/teams-repository-stub';
+import { ITeamsRepository } from '../data/I-teams-repository';
 
 type TeamData = ITeam[] | undefined;
 
@@ -14,7 +15,7 @@ type TeamData = ITeam[] | undefined;
   providedIn: 'root', // <-- This registers the service at the root level
 })
 export class TeamService {
-  teamsRepository = inject(TeamsRepository);
+  teamsRepository: ITeamsRepository = inject(TeamsRepositoryStub);
 
   fetchTeams(): Signal<TeamData> {
     const teamsSignal: WritableSignal<TeamData> = signal(undefined);

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TeamsRepository } from './teams-repository';
+import { TeamsRepositoryStub } from './teams-repository-stub';
 
 describe('TeansRepository', () => {
-  let service: TeamsRepository;
+  let service: TeamsRepositoryStub;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TeamsRepository);
+    service = TestBed.inject(TeamsRepositoryStub);
   });
 
   it('should be created', () => {
