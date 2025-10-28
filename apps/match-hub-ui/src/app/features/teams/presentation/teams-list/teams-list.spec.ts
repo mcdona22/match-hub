@@ -31,7 +31,7 @@ describe('TeamsList', () => {
     // await fixture.whenStable();
   });
 
-  fit('should create', async () => {
+  it('should create', async () => {
     const someTeamsCss = '.data-team-list';
     await setupComponent();
 
@@ -45,7 +45,7 @@ describe('TeamsList', () => {
     expect(teamList).withContext('couldnt find the teams div').toBeTruthy();
   });
 
-  fit('should show some teams when they are available', async () => {
+  it('should show some teams when they are available', async () => {
     const noTeamsCss = '.data-no-teams';
     const someTeamsCss = '.data-team-list';
 
@@ -58,7 +58,7 @@ describe('TeamsList', () => {
     console.log(`Teams`, someTeams.nativeElement.innerText);
   });
 
-  fit('if the teams list is empty then the message is shown only', async () => {
+  it('if the teams list is empty then the message is shown only', async () => {
     const noTeamsCss = '.data-no-teams';
     const someTeamsCss = '.data-team-list';
 
