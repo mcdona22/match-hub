@@ -1,0 +1,27 @@
+@use '../../../../../styles/custom-theme-vars' as vars;
+
+.team-tilez {
+  //padding: 1rem;
+  //border: 1px solid var(--mat-sys-on-surface);
+  ////border: 1px solid yellow;
+  //width: 200px;
+  //border-radius: 12px;
+  //text-align: center;
+  //font-size: 1.2rem;
+
+}
+
+mat-card {
+  padding: 1rem;
+  text-align: center;
+  width: 200px;
+
+  mat-card-title {
+    font-size: 1.1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+  }
+
+}
+

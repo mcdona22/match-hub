@@ -1,4 +1,5 @@
 @use 'styles/custom-theme-vars' as vars;
+@use 'styles/page-elements';
 @import "../node_modules/@angular/material/prebuilt-themes/magenta-violet.css";
 
 :root {

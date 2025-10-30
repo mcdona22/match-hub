@@ -9,8 +9,7 @@
     <p class="lorem">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab commodi cupiditate distinctio dolore
       impedit laborum null.</p>
 
-    <p class="lorem">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus commodi cum esse ex id natus
-      porro rem temporibus! Deserunt, dolorem error ex excepturi exercitationem fuga incidunt ipsa laboriosam molestiae
+    <p class="lorem">Lorem ipsum dolor slorem error ex excepturi exercitationem fuga incidunt ipsa laboriosam molestiae
     </p>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -20,9 +19,14 @@
         <!--        <div>LOGO</div>-->
         <div class="app-title">Match Hub</div>
         <div class="flex-spacer"></div>
+        @for (item of menuOptions; track item.dataTag) {
 
-        <a class="data-link-teams" routerLink="/teams">Teams</a>
-        <a class="data-link-calender" routerLink="/calendar">Calender</a>
+          <a class="data-link-{{item.dataTag}}"
+             routerLink="/{{item.path}}">{{ item.caption }}</a>
+
+        }
+
+
         <button (click)="toggleOpened()" mat-icon-button>
           <mat-icon>menu</mat-icon>
         </button>

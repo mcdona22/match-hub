@@ -1,0 +1,19 @@
+<div class="team-list data-team-list">
+  @for (team of teams(); track team?.id) {
+    <div class="team">
+      <app-team-tile [team]="team"/>
+
+
+    </div>
+  }
+</div>
+
+@if (teams().length == 0) {
+  <div class="data-no-teams">
+    No teams here
+
+  </div>
+}
+
+
+
