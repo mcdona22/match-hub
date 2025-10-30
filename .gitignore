@@ -1,3 +1,6 @@
 .idea/
 apps/match-hub-ui/cypress/results
 apps/match-hub-ui/mochawesome-report
+
+apps/match-hub-ui/cypress/screenshots/
+

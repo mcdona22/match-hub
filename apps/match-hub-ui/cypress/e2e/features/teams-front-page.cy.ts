@@ -27,6 +27,7 @@ describe('Teams Front Page Interaction', () => {
       .should('have.length', expectedTeams.length)
       .each(($el, index, $list) => {
         const teamName = $el.text().trim();
+        console.log(`exoecting "${teamName}"  to be ${expectedTeams[0]}"`);
         expect(teamName).to.equal(expectedTeams[index]);
       });
   });
