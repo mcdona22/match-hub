@@ -14,5 +14,22 @@
     </div>
   }
 
+  <div class="nonsense">
+    <div class="label">
+
+      {{ nonsense() }}
+    </div>
+    <div class="text-input">
+      <mat-form-field floatLabel="auto">
+        <mat-label>Input</mat-label>
+
+
+        <input [(ngModel)]="nonsense" matInput type="text"/>
+      </mat-form-field>
+
+
+    </div>
+  </div>
+
 
 </div>

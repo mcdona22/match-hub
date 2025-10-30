@@ -11,9 +11,10 @@ interface MenuOption {
   dataTag: string;
 }
 
-const toolBarOptions: MenuOption[] = [
+export const toolBarOptions: MenuOption[] = [
   { caption: 'Teams', path: 'teams', dataTag: 'teams' },
   { caption: 'Calendar', path: 'calendar', dataTag: 'calendar' },
+  { caption: 'Home', path: '/', dataTag: 'home' },
 ];
 
 @Component({

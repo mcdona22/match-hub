@@ -1,10 +1,8 @@
 <div class="team-list data-team-list">
   @for (team of teams(); track team?.id) {
     <div class="team">
-      <div class="data-name">
-        {{ team.name }}
+      <app-team-tile [team]="team"/>
 
-      </div>
 
     </div>
   }
