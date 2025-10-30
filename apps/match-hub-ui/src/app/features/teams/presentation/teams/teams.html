@@ -1,5 +1,13 @@
 <div class="standard-wrapper centred-max-width data-teams-page">
-  <div class="page-title">Teams</div>
+  <div class="title-wrapper">
+    <div class="page-title">Teams</div>
+    <div class="team-add">
+      <button (click)="onNew()" mat-icon-button>
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+
   <div class="section-title">Current Team List</div>
 
   @if (!fetchedTeams()) {
@@ -8,28 +16,33 @@
       <mat-spinner diameter="40" strokeWidth="4"></mat-spinner>
     </div>
   } @else {
+
     <div class="data-teams-list">
 
       <app-teams-list [teams]="teams()"/>
     </div>
   }
 
-  <div class="nonsense">
-    <div class="label">
+  @if (false) {
 
-      {{ nonsense() }}
+
+    <div class="nonsense">
+      <div class="label">
+
+        {{ nonsense() }}
+      </div>
+      <div class="text-input">
+        <mat-form-field floatLabel="auto">
+          <mat-label>Input</mat-label>
+
+
+          <input [(ngModel)]="nonsense" matInput type="text"/>
+        </mat-form-field>
+
+
+      </div>
     </div>
-    <div class="text-input">
-      <mat-form-field floatLabel="auto">
-        <mat-label>Input</mat-label>
-
-
-        <input [(ngModel)]="nonsense" matInput type="text"/>
-      </mat-form-field>
-
-
-    </div>
-  </div>
+  }
 
 
 </div>
