@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { ITeam } from './i-team';
 import { ITeamsRepository } from './I-teams-repository';
 
+const teamsKey = 'match-hub.teams';
+
 export const data: ITeam[] = [
   { id: '1', name: 'Nottingham Forest', postCode: 'n12nf' },
   { id: '2', name: 'Man United', postCode: 'm12mu' },
@@ -17,10 +19,34 @@ export const data: ITeam[] = [
 export class TeamsRepositoryStub implements ITeamsRepository {
   delay = 300;
 
+  constructor() {
+    console.log(`In the constructor`);
+    const localData = localStorage.getItem(teamsKey);
+    if (!localData) {
+      console.log(`Data is not set.  Saving what starter data`, data);
+      localStorage.setItem(teamsKey, JSON.stringify(data));
+    }
+  }
+
   async readAllTeams(): Promise<ITeam[]> {
     console.log(`initiating fetch in repo`);
     await new Promise((resolve) => setTimeout(resolve, this.delay));
     console.log(`readAllTeams complete after ${this.delay}ms`);
-    return data;
+    return this.storedTeams();
+  }
+
+  async writeTeam(team: ITeam): Promise<boolean> {
+    console.log(`about to write team`, team);
+    const storedTeams = this.storedTeams();
+    const newTeams = [...storedTeams, team];
+    console.log(`REPO - writing some teams`, newTeams);
+    localStorage.setItem(teamsKey, JSON.stringify(newTeams));
+
+    return Promise.resolve(true);
+  }
+
+  private storedTeams() {
+    const localData = localStorage.getItem(teamsKey);
+    return JSON.parse(localData!) as ITeam[];
   }
 }

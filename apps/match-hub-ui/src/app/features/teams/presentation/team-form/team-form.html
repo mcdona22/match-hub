@@ -4,7 +4,7 @@
     <div class="form-title page-title">Add Team</div>
     <mat-form-field>
       <mat-label>Team Name</mat-label>
-      <input #nameCtl (input)="onInput($event, maxName)" formControlName="name" matInput placeholder="team name">
+      <input (input)="onInput($event, maxName)" formControlName="name" matInput placeholder="team name">
       @if (!name.untouched && name.errors) {
         @if (name.errors!['required']) {
           <mat-error>Name is required</mat-error>
@@ -16,9 +16,7 @@
         @if (name.errors!['maxlength']) {
           <mat-error>Name must be less than {{ maxName }} characters</mat-error>
         }
-        <!--        @if (nameCtl.value.length > maxName / 3) {-->
-          <!--          <mat-hint>{{ maxName - nameCtl.value.length }} characters remaining</mat-hint>-->
-          <!--        }-->
+
 
       }
 
@@ -28,17 +26,21 @@
     <mat-form-field>
       <mat-label>Post Code</mat-label>
       <input formControlName="postCode" matInput placeholder="team post code">
+      @if (!postCode.untouched && postCode.errors) {
+        @if (postCode.errors!['required']) {
+          <mat-error>post code is required</mat-error>
+        }
+        @if (postCode.errors!['invalidPostCode']) {
+          <mat-error>incorrect postcode format</mat-error>
+        }
+      }
     </mat-form-field>
-    @if (postCode.errors) {
-      @if (postCode.errors!['required']) {
-        <mat-error>post code is required</mat-error>
-      }
-      @if (postCode.errors!['invalidPostCode']) {
-        <mat-error>incorrect postcode format</mat-error>
-      }
-    }
 
-    <button (click)="onTeamCreate()" [disabled]="!form.valid" mat-stroked-button>Create Club</button>
+
+    <button (click)="onTeamCreate()"
+            [disabled]="form.invalid"
+            mat-stroked-button>Create Club
+    </button>
 
 
   </div>
@@ -48,6 +50,7 @@
   </p>
 
   <p>{{ name.errors |json }}</p>
+  <p> Post code errors {{ postCode.errors |json }}</p>
   <p>
     validity {{ form.valid }}
   </p>

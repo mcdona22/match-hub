@@ -10,8 +10,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { max } from 'rxjs';
 import { JsonPipe } from '@angular/common';
-import { postCodeValidator } from '../../../global/post-code-validator';
-import { PostcodeFormatPipe } from '../../../global/postCode.pipe';
+import { postCodeValidator } from '../../../common/post-code-validator';
+import { PostcodeFormatPipe } from '../../../common/postCode.pipe';
+import { TeamService } from '../../application/team-service';
+import { ITeam } from '../../data/i-team';
+import { Router } from '@angular/router';
+import { teamsPath } from '../../../../app.routes';
 
 @Component({
   selector: 'app-team-form',
@@ -29,6 +33,9 @@ import { PostcodeFormatPipe } from '../../../global/postCode.pipe';
 export class TeamForm {
   readonly minName = 4;
   readonly maxName = 20;
+
+  teamService = inject(TeamService);
+  router = inject(Router);
 
   formBuilder = inject(FormBuilder);
 
@@ -64,7 +71,31 @@ export class TeamForm {
 
   onTeamCreate() {
     const { name, postCode } = this.form.value;
+    if (this.form.invalid) {
+      console.log(`Form not valid - not submitting`);
+      return;
+    }
 
-    console.log(`Values`, name, postCode);
+    const strippedPostCode = postCode?.toLowerCase().replace(/\s/g, '');
+    this.teamService
+      .saveTeam({
+        name,
+        postCode: strippedPostCode,
+      } as ITeam)
+      .subscribe({
+        next: (team) => {
+          console.log(`Team Created`, team);
+        },
+        complete: () => {
+          console.log(`We are all finished`);
+          console.log(`Turn off the spinner`);
+          console.log(`Navigate`);
+          this.router.navigate([teamsPath]).then();
+        },
+        error: (err) => console.log(`There was an error`, err),
+      });
   }
+
+  randomKey = () =>
+    Date.now().toString() + Math.floor(Math.random() * 1000).toString();
 }

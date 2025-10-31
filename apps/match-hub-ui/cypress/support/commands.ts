@@ -25,7 +25,7 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 //
-// declare global {
+// declare common {
 //   namespace Cypress {
 //     interface Chainable {
 //       login(email: string, password: string): Chainable<void>
