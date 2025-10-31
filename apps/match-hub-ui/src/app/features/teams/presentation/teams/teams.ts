@@ -1,4 +1,4 @@
-import { Component, computed, inject, model } from '@angular/core';
+import { Component, computed, effect, inject, model } from '@angular/core';
 import { TeamService } from '../../application/team-service';
 import { TeamsList } from '../teams-list/teams-list';
 import { ITeam } from '../../data/i-team';
@@ -29,6 +29,7 @@ export class Teams {
   router = inject(Router);
 
   teamsService = inject(TeamService);
+
   fetchedTeams = this.teamsService.fetchTeams();
   nonsense = model('initial value');
   waiting = computed(() => this.fetchedTeams == undefined);
@@ -37,6 +38,13 @@ export class Teams {
       this.fetchedTeams() === undefined ? [] : this.fetchedTeams()
     ) as ITeam[];
   });
+
+  constructor() {
+    console.log(`constructor`);
+    effect(() =>
+      console.log(`Change in value from teams service`, this.fetchedTeams()),
+    );
+  }
 
   onNew() {
     console.log(`Navigate to new`);

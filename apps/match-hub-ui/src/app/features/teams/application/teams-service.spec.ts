@@ -8,7 +8,7 @@ type TeamsRepositorySpy = jasmine.SpyObj<ITeamsRepository> & {
   readAllTeamsSpy: jasmine.Spy<ITeamsRepository['readAllTeams']>;
 };
 
-fdescribe('TeamsService', () => {
+describe('TeamsService', () => {
   let service: TeamService;
   let teamsRepositorySpy: TeamsRepositorySpy;
 
@@ -61,7 +61,10 @@ fdescribe('TeamsService', () => {
   });
 
   it('should  resolve to a populated list where available after a pause', async () => {
-    const teams: ITeam[] = [{ name: 'Forest' }, { name: 'Man Utd' }];
+    const teams: ITeam[] = [
+      { name: 'Forest', postCode: 'n2 2nf' },
+      { name: 'Man Utd', postCode: 'm2 4rd' },
+    ];
     const { promise, resolve } = createControllablePromise();
     teamsRepositorySpy.readAllTeamsSpy.and.returnValue(promise);
     const response = service.fetchTeams();

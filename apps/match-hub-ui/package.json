@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "cypress:open": "cypress open",
-    "cypress:run": "cypress run",
+    "cypress:run": "cypress run && npm run start:e2e",
     "start:e2e": "ng serve --port 4300",
     "test": "ng test --no-watch --browsers=ChromeHeadless --code-coverage",
     "test:unit": "ng test --no-watch --browsers=ChromeHeadless",

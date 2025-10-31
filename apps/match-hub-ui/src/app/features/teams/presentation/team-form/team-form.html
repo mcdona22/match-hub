@@ -1,1 +1,59 @@
-<p>team-form works!</p>
+<div class="standard-wrapper centred-max-width data-new-team">
+
+  <div [formGroup]="form" class="form">
+    <div class="form-title page-title">Add Team</div>
+    <mat-form-field>
+      <mat-label>Team Name</mat-label>
+      <input #nameCtl (input)="onInput($event, maxName)" formControlName="name" matInput placeholder="team name">
+      @if (!name.untouched && name.errors) {
+        @if (name.errors!['required']) {
+          <mat-error>Name is required</mat-error>
+        }
+
+        @if (name.errors!['minlength']) {
+          <mat-error>Name must be more than {{ minName }} characters</mat-error>
+        }
+        @if (name.errors!['maxlength']) {
+          <mat-error>Name must be less than {{ maxName }} characters</mat-error>
+        }
+        <!--        @if (nameCtl.value.length > maxName / 3) {-->
+          <!--          <mat-hint>{{ maxName - nameCtl.value.length }} characters remaining</mat-hint>-->
+          <!--        }-->
+
+      }
+
+
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Post Code</mat-label>
+      <input formControlName="postCode" matInput placeholder="team post code">
+    </mat-form-field>
+    @if (postCode.errors) {
+      @if (postCode.errors!['required']) {
+        <mat-error>post code is required</mat-error>
+      }
+      @if (postCode.errors!['invalidPostCode']) {
+        <mat-error>incorrect postcode format</mat-error>
+      }
+    }
+
+    <button (click)="onTeamCreate()" [disabled]="!form.valid" mat-stroked-button>Create Club</button>
+
+
+  </div>
+  <p>
+
+    {{ form.value |json }}
+  </p>
+
+  <p>{{ name.errors |json }}</p>
+  <p>
+    validity {{ form.valid }}
+  </p>
+  <p>
+    {{ form.value.postCode | postcodeFormat }}
+  </p>
+
+
+</div>
