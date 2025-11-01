@@ -5,6 +5,7 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { teamsPath } from '../app.routes';
+import { LoadingSpinner } from '../features/loading/presentation/loading-spinner/loading-spinner';
 
 interface MenuOption {
   caption: string;
@@ -28,6 +29,7 @@ export const toolBarOptions: MenuOption[] = [
     MatButtonModule,
     MatIconModule,
     RouterLink,
+    LoadingSpinner,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

@@ -11,9 +11,10 @@
   <div class="section-title">Current Team List</div>
 
   @if (fetchedTeams() === undefined) {
-    <div class="spinner">
-      <mat-spinner diameter="40" strokeWidth="4"></mat-spinner>
+    <div class="placeholder">
+      Fetching teams ...
     </div>
+
   } @else {
 
     <div class="data-teams-list">

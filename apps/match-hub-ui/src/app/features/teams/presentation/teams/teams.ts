@@ -27,7 +27,6 @@ import { newSegment, teamsPath } from '../../../../app.routes';
 })
 export class Teams {
   router = inject(Router);
-
   teamsService = inject(TeamService);
 
   fetchedTeams = this.teamsService.fetchTeams();

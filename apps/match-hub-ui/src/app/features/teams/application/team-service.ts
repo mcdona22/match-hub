@@ -8,7 +8,8 @@ import {
 } from '@angular/core';
 import { TeamsRepositoryStub } from '../data/teams-repository-stub';
 import { ITeamsRepository } from '../data/I-teams-repository';
-import { map, of, throwError } from 'rxjs';
+import { from, map, throwError } from 'rxjs';
+import { LoadingService } from '../../loading/application/loading-service';
 
 export type TeamData = ITeam[] | undefined;
 
@@ -16,14 +17,16 @@ export type TeamData = ITeam[] | undefined;
   providedIn: 'root', // <-- This registers the service at the root level
 })
 export class TeamService {
+  loadingService = inject(LoadingService);
   teamsRepository: ITeamsRepository = inject(TeamsRepositoryStub);
 
   fetchTeams(): Signal<TeamData> {
     const teamsSignal: WritableSignal<TeamData> = signal(undefined);
-
+    this.loadingService.loadingStart();
     this.teamsRepository.readAllTeams().then((teams: ITeam[]) => {
       teamsSignal.set(teams.sort((t1, t2) => (t1.name > t2.name ? 1 : -1)));
       console.log(`TeamService: the repo has fulfilled  service`);
+      this.loadingService.loadingStop();
     });
     return teamsSignal;
   }
@@ -36,7 +39,7 @@ export class TeamService {
       return throwError(() => new Error('We dont like forest these days'));
     }
 
-    return of(this.teamsRepository.writeTeam(savedTeam)).pipe(
+    return from(this.teamsRepository.writeTeam(savedTeam)).pipe(
       map((response) => {
         console.log(`The response was good`, response);
         return savedTeam;

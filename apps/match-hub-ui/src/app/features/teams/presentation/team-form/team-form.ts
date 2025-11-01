@@ -8,13 +8,14 @@ import {
 import { MatInput } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { max } from 'rxjs';
+import { finalize, max } from 'rxjs';
 import { JsonPipe } from '@angular/common';
 import { postCodeValidator } from '../../../common/post-code-validator';
 import { PostcodeFormatPipe } from '../../../common/postCode.pipe';
 import { TeamService } from '../../application/team-service';
 import { ITeam } from '../../data/i-team';
 import { Router } from '@angular/router';
+import { LoadingService } from '../../../loading/application/loading-service';
 import { teamsPath } from '../../../../app.routes';
 
 @Component({
@@ -35,6 +36,7 @@ export class TeamForm {
   readonly maxName = 20;
 
   teamService = inject(TeamService);
+  loadingService = inject(LoadingService);
   router = inject(Router);
 
   formBuilder = inject(FormBuilder);
@@ -77,18 +79,24 @@ export class TeamForm {
     }
 
     const strippedPostCode = postCode?.toLowerCase().replace(/\s/g, '');
+    this.loadingService.loadingStart();
+
     this.teamService
       .saveTeam({
         name,
         postCode: strippedPostCode,
       } as ITeam)
+      .pipe(
+        finalize(() => {
+          console.log(`Turning the spinner off`);
+          this.loadingService.loadingStop();
+        }),
+      )
       .subscribe({
         next: (team) => {
           console.log(`Team Created`, team);
         },
         complete: () => {
-          console.log(`We are all finished`);
-          console.log(`Turn off the spinner`);
           console.log(`Navigate`);
           this.router.navigate([teamsPath]).then();
         },
