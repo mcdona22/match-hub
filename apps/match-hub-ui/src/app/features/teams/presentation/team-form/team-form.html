@@ -37,9 +37,11 @@
     </mat-form-field>
 
 
-    <button (click)="onTeamCreate()"
-            [disabled]="form.invalid"
-            mat-stroked-button>Create Club
+    <button
+      (click)="onTeamCreate()"
+      [disabled]="form.invalid"
+      class="data-submit"
+      mat-stroked-button>Create Club
     </button>
 
 
@@ -49,7 +51,7 @@
     {{ form.value |json }}
   </p>
 
-  <p>{{ name.errors |json }}</p>
+  <p>Name errors {{ name.errors |json }}</p>
   <p> Post code errors {{ postCode.errors |json }}</p>
   <p>
     validity {{ form.valid }}
