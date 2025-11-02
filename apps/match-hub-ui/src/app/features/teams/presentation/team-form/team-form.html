@@ -1,0 +1,64 @@
+<div class="standard-wrapper centred-max-width data-new-team">
+
+  <div [formGroup]="form" class="form">
+    <div class="form-title page-title">Add Team</div>
+    <mat-form-field class="data-input-name">
+      <mat-label>Team Name</mat-label>
+      <input (input)="onInput($event, maxName)" formControlName="name" matInput placeholder="team name">
+      @if (!name.untouched && name.errors) {
+        @if (name.errors!['required']) {
+          <mat-error>Name is required</mat-error>
+        }
+
+        @if (name.errors!['minlength']) {
+          <mat-error>Name must be more than {{ minName }} characters</mat-error>
+        }
+        @if (name.errors!['maxlength']) {
+          <mat-error>Name must be less than {{ maxName }} characters</mat-error>
+        }
+
+
+      }
+
+
+    </mat-form-field>
+
+    <mat-form-field class="data-input-postcode">
+      <mat-label>Post Code</mat-label>
+      <input formControlName="postCode" matInput placeholder="team post code">
+      @if (!postCode.untouched && postCode.errors) {
+        @if (postCode.errors!['required']) {
+          <mat-error>post code is required</mat-error>
+        }
+        @if (postCode.errors!['invalidPostCode']) {
+          <mat-error>incorrect postcode format</mat-error>
+        }
+      }
+    </mat-form-field>
+
+
+    <button
+      (click)="onTeamCreate()"
+      [disabled]="form.invalid"
+      class="data-submit"
+      mat-stroked-button>Create Club
+    </button>
+
+
+  </div>
+  <p>
+
+    {{ form.value |json }}
+  </p>
+
+  <p>Name errors {{ name.errors |json }}</p>
+  <p> Post code errors {{ postCode.errors |json }}</p>
+  <p>
+    validity {{ form.valid }}
+  </p>
+  <p>
+    {{ form.value.postCode | postcodeFormat }}
+  </p>
+
+
+</div>

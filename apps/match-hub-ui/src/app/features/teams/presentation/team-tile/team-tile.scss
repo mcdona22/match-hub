@@ -11,8 +11,13 @@
 
 }
 
+.vertical-padding {
+  //padding: .5rem 0;
+
+}
+
 mat-card {
-  padding: 1rem;
+  padding: .5rem;
   text-align: center;
   width: 200px;
 
@@ -23,5 +28,10 @@ mat-card {
     text-overflow: ellipsis
   }
 
+}
+
+.post-code {
+  font-size: 0.8rem;
+  //text-align: left;
 }
 

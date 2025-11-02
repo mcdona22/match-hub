@@ -6,3 +6,9 @@ input {
   width: 20rem;
   //padding: .5rem
 }
+
+.title-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

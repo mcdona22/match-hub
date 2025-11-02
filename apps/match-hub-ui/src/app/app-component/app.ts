@@ -4,6 +4,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbar } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { teamsPath } from '../app.routes';
+import { LoadingSpinner } from '../features/loading/presentation/loading-spinner/loading-spinner';
 
 interface MenuOption {
   caption: string;
@@ -12,7 +14,7 @@ interface MenuOption {
 }
 
 export const toolBarOptions: MenuOption[] = [
-  { caption: 'Teams', path: 'teams', dataTag: 'teams' },
+  { caption: 'Teams', path: teamsPath, dataTag: 'teams' },
   { caption: 'Calendar', path: 'calendar', dataTag: 'calendar' },
   { caption: 'Home', path: '/', dataTag: 'home' },
 ];
@@ -27,6 +29,7 @@ export const toolBarOptions: MenuOption[] = [
     MatButtonModule,
     MatIconModule,
     RouterLink,
+    LoadingSpinner,
   ],
   templateUrl: './app.html',
   styleUrl: './app.scss',
