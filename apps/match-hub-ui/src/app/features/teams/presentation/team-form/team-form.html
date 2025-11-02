@@ -2,7 +2,7 @@
 
   <div [formGroup]="form" class="form">
     <div class="form-title page-title">Add Team</div>
-    <mat-form-field>
+    <mat-form-field class="data-input-name">
       <mat-label>Team Name</mat-label>
       <input (input)="onInput($event, maxName)" formControlName="name" matInput placeholder="team name">
       @if (!name.untouched && name.errors) {
@@ -23,7 +23,7 @@
 
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="data-input-postcode">
       <mat-label>Post Code</mat-label>
       <input formControlName="postCode" matInput placeholder="team post code">
       @if (!postCode.untouched && postCode.errors) {
