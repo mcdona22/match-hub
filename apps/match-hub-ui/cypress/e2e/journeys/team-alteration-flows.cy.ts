@@ -12,6 +12,9 @@ describe('Teams form should present correctly', () => {
 });
 
 describe('TeamAlterationFlows', () => {
+  beforeEach(() => {
+    cy.visit('/teams');
+  });
   it('should successfully add a team');
   it('should not add a team unless valid input');
   it('should not add a team add unless button pressed');
