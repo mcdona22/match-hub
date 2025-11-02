@@ -28,6 +28,12 @@ export class TeamsRepositoryStub implements ITeamsRepository {
     }
   }
 
+  async readTeam(id: string): Promise<ITeam> {
+    const team = { id, name: 'Colchester United', postCode: 'hd22su' } as ITeam;
+    await new Promise((resolve) => setTimeout(resolve, this.delay));
+    return team;
+  }
+
   async readAllTeams(): Promise<ITeam[]> {
     console.log(`initiating fetch in repo`);
     await new Promise((resolve) => setTimeout(resolve, this.delay));

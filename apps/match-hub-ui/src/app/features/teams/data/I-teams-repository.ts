@@ -4,4 +4,6 @@ export interface ITeamsRepository {
   readAllTeams(): Promise<ITeam[]>;
 
   writeTeam(team: ITeam): Promise<boolean>;
+
+  readTeam(id: string): Promise<ITeam>;
 }

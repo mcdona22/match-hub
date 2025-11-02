@@ -47,7 +47,6 @@ describe('The form should validate as expected', () => {
       cy.get('.form > .data-input-postcode input').focus();
       cy.get('.form > .data-input-name input').focus();
 
-      cy.pause();
       cy.get('mat-error').should('be.visible');
       cy.get('.data-submit').should('be.visible').and('be.disabled');
     });

@@ -12,6 +12,7 @@ import { from, map, throwError } from 'rxjs';
 import { LoadingService } from '../../loading/application/loading-service';
 
 export type TeamData = ITeam[] | undefined;
+export type SingleTeamData = ITeam | undefined;
 
 @Injectable({
   providedIn: 'root', // <-- This registers the service at the root level
@@ -29,6 +30,19 @@ export class TeamService {
       this.loadingService.loadingStop();
     });
     return teamsSignal;
+  }
+
+  fetchTeam(id: string) {
+    // const teamsSignal: WritableSignal<SingleTeamData> = signal(undefined);
+    const teamSignal: WritableSignal<SingleTeamData> = signal(undefined);
+    this.loadingService.loadingStart();
+    this.teamsRepository.readTeam(id).then((team: ITeam) => {
+      teamSignal.set(team);
+      this.loadingService.loadingStop();
+    });
+
+    return teamSignal;
+    // return from(this.teamsRepository.readTeam(id));
   }
 
   saveTeam(team: ITeam) {
