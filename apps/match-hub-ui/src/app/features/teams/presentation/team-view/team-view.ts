@@ -3,10 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { TeamService } from '../../application/team-service';
 import { PostcodeFormatPipe } from '../../../common/postCode.pipe';
+import { TeamSummaryView } from '../team-summary-view/team-summary-view';
 
 @Component({
   selector: 'app-team-view',
-  imports: [AsyncPipe, PostcodeFormatPipe],
+  imports: [AsyncPipe, PostcodeFormatPipe, TeamSummaryView],
   templateUrl: './team-view.html',
   styleUrl: './team-view.scss',
 })
