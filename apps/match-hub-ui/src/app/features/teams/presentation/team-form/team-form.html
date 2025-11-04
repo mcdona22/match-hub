@@ -1,6 +1,6 @@
-<div class="standard-wrapper centred-max-width data-new-team">
+<div class="standard-wrapper  centred-max-width data-new-team">
 
-  <div [formGroup]="form" class="form">
+  <div [formGroup]="form" class="form ">
     <div class="form-title page-title">Add Team</div>
     <mat-form-field class="data-input-name">
       <mat-label>Team Name</mat-label>
@@ -47,7 +47,34 @@
         }
       }
     </mat-form-field>
-    <button mat-button>Add Contact Details</button>
+    <button (click)="onAddContact()" mat-button>Add Contact Details</button>
+    <div class="contacts">
+      @for (contact of contactForms; track i; let i = $index; ) {
+        <div class="contact-form">
+
+
+          <div
+            [formGroup]="contact"
+            class="contact-form-row">
+
+            <mat-form-field>
+              <mat-label>Contact Label</mat-label>
+              <input matInput placeholder="contact description" formControlName="label">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Value</mat-label>
+              <input formControlName="value" matInput placeholder="email, phome, website or free text">
+            </mat-form-field>
+            <button mat-button (click)="onDeleteContactRow(i)">
+              X
+            </button>
+
+          </div>
+        </div>
+
+      }
+    </div>
 
 
     <button
@@ -59,6 +86,8 @@
 
 
   </div>
+
+
   <!--  <p>-->
 
   <!--    {{ form.value |json }}-->
@@ -73,5 +102,5 @@
   <!--    {{ form.value.postCode | postcodeFormat }}-->
   <!--  </p>-->
 
-
+  {{ formValue() | json }}
 </div>

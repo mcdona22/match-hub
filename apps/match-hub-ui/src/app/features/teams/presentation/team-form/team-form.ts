@@ -1,7 +1,9 @@
 import { Component, inject } from '@angular/core';
 import {
+  FormArray,
   FormBuilder,
   FormControl,
+  FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -15,10 +17,21 @@ import { ITeam } from '../../data/i-team';
 import { Router } from '@angular/router';
 import { LoadingService } from '../../../loading/application/loading-service';
 import { teamsPath } from '../../../../app.routes';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { JsonPipe } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-team-form',
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInput, MatButtonModule],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInput,
+    MatButtonModule,
+    JsonPipe,
+    MatIcon,
+  ],
+  standalone: true,
   templateUrl: './team-form.html',
   styleUrl: './team-form.scss',
 })
@@ -46,9 +59,11 @@ export class TeamForm {
     league: new FormControl('', {
       validators: [Validators.maxLength(this.maxName)],
     }),
+    contacts: this.formBuilder.array([]) as FormArray,
   });
 
-  // protected readonly max = max;
+  formValue = toSignal(this.form.valueChanges);
+  protected readonly FormGroup = FormGroup;
 
   get name() {
     return this.form.controls.name;
@@ -60,6 +75,22 @@ export class TeamForm {
 
   get postCode() {
     return this.form.controls.postCode;
+  }
+
+  get contacts() {
+    return this.form.controls.contacts;
+  }
+
+  get contactForms(): FormGroup[] {
+    return this.contacts.controls.map((c) => c as FormGroup);
+  }
+
+  onAddContact() {
+    const contactForm = this.formBuilder.group({
+      label: new FormControl('', [Validators.required]),
+      value: new FormControl('', [Validators.required]),
+    });
+    this.contacts.push(contactForm);
   }
 
   onInput(_: Event, control: FormControl, maxLength: number) {
@@ -106,4 +137,8 @@ export class TeamForm {
 
   randomKey = () =>
     Date.now().toString() + Math.floor(Math.random() * 1000).toString();
+
+  onDeleteContactRow(index: number) {
+    this.contacts.removeAt(index);
+  }
 }

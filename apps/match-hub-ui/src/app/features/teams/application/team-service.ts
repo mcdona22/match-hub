@@ -46,7 +46,7 @@ export class TeamService {
   }
 
   saveTeam(team: ITeam) {
-    const savedTeam = { ...team };
+    const savedTeam = { ...team, contacts: [] };
     console.log(`TEAM SERVICE: saving team`, savedTeam);
     if (team.name == 'forest') {
       console.log(`Oops - forest`);

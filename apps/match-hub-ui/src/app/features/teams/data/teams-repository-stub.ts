@@ -6,12 +6,12 @@ const teamsKey = 'match-hub.teams';
 const Premier = 'Premier';
 
 export const data: ITeam[] = [
-  { name: 'Nottingham Forest', postCode: 'n12nf' },
-  { name: 'Man United', postCode: 'm12mu', league: Premier },
-  { name: 'Sunderland', postCode: 'su31sm', league: Premier },
-  { name: 'Aston Villa', postCode: 'b123fa', league: Premier },
-  { name: 'Arsenal', postCode: 'ne123xy', league: Premier },
-  { name: 'Liverpool', postCode: 'lv45gg', league: Premier },
+  { name: 'Nottingham Forest', postCode: 'n12nf', contacts: [] },
+  { name: 'Man United', postCode: 'm12mu', league: Premier, contacts: [] },
+  { name: 'Sunderland', postCode: 'su31sm', league: Premier, contacts: [] },
+  { name: 'Aston Villa', postCode: 'b123fa', league: Premier, contacts: [] },
+  { name: 'Arsenal', postCode: 'ne123xy', league: Premier, contacts: [] },
+  { name: 'Liverpool', postCode: 'lv45gg', league: Premier, contacts: [] },
 ];
 
 @Injectable({
@@ -30,6 +30,9 @@ export class TeamsRepositoryStub implements ITeamsRepository {
         name: 'Test Team FC',
         postCode: 'lv45gg',
         league: 'Test League',
+        contacts: [
+          { label: 'Manager', value: 'manager@test.com', contactType: 'EMAIL' },
+        ],
       });
       console.log(`Data is not set.  Saving what starter data`, updated);
       localStorage.setItem(teamsKey, JSON.stringify(updated));
