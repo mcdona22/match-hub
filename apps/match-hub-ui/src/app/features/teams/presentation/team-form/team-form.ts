@@ -20,6 +20,7 @@ import { teamsPath } from '../../../../app.routes';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { JsonPipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
+import { determineContactType, IContact } from '../../data/i-contact';
 
 @Component({
   selector: 'app-team-form',
@@ -111,11 +112,15 @@ export class TeamForm {
     const strippedPostCode = postCode?.toLowerCase().replace(/\s/g, '');
     this.loadingService.loadingStart();
 
+    const contacts: IContact[] = this.form.value.contacts.map(this.mapContact);
+    console.log(`Mapped Contacts`, contacts);
+
     this.teamService
       .saveTeam({
         name: name?.trim(),
         postCode: strippedPostCode,
         league: league?.trim(),
+        contacts,
       } as ITeam)
       .pipe(
         finalize(() => {
@@ -140,5 +145,12 @@ export class TeamForm {
 
   onDeleteContactRow(index: number) {
     this.contacts.removeAt(index);
+  }
+
+  mapContact(contact: Partial<IContact>): IContact {
+    const { label, value } = contact;
+    const text = value?.trim() ?? '';
+    const contactType = determineContactType(text);
+    return { label: label!, value: value!, contactType };
   }
 }

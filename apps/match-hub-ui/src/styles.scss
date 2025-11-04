@@ -1,6 +1,6 @@
 @use 'styles/custom-theme-vars' as vars;
 @use 'styles/page-elements';
-@import "../node_modules/@angular/material/prebuilt-themes/magenta-violet.css";
+@import "../node_modules/@angular/material/prebuilt-themes/cyan-orange.css";
 
 :root {
   // Main background color for all surfaces (page, cards, etc.)
@@ -36,5 +36,5 @@ body {
 
 
 .debug {
-  border: lightcoral 1px solid;
+  border: lime 1px solid;
 }

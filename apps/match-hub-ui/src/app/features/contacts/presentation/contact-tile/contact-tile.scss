@@ -1,0 +1,36 @@
+.contact {
+  display: flex;
+  padding: .5rem 0;
+
+  gap: 1rem;
+  align-items: center;
+
+  mat-icon {
+    color: var(--mat-sys-on-secondary-container);
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--mat-sys-secondary-fixed-dim);
+  }
+}
+
+.contact-item {
+  flex-grow: 1;
+
+  mat-icon {
+    color: var(--mat-sys-tertiary);
+  }
+}
+
+.contact-means {
+  display: flex;
+  gap: 1rem;
+}
+
+.contact-item:first-child {
+  /* flex-grow: 0 (don't grow), flex-shrink: 0 (don't shrink), flex-basis: auto (use content width) */
+  flex: 0 0 auto;
+}
+
+

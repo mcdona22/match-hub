@@ -1,0 +1,40 @@
+<!--<div class="contact">-->
+<!--  <div class="contact-item">-->
+<!--    <mat-icon>{{ contactGraphic(contact().contactType) }}</mat-icon>-->
+<!--  </div>-->
+<!--  <div class="contact-item">{{ contact().label }}</div>-->
+<!--  <div class="contact-means">-->
+<!--    <div class="contact-graphic">-->
+<!--      <mat-icon>{{ contactGraphic(contact().contactType) }}</mat-icon>-->
+<!--    </div>-->
+<!--    <div class="contact-item">{{ contact().value }}</div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="contact">
+  <div class="icon">
+    <mat-icon>{{ contactGraphic(contact().contactType) }}</mat-icon>
+  </div>
+  <div class="contact-detail">
+    @switch (contact().contactType) {
+      @case ('EMAIL') {
+        <div class="label"><a href="mailto:{{contact().value}}"> {{ contact().label }}</a></div>
+
+      }
+      @case ('URL') {
+        <div class="label"><a href="{{contact().value}}"> {{ contact().label }}</a></div>
+      }
+      @case ('PHONE') {
+        <div class="label">{{ contact().label }}</div>
+        <div class="value">{{ contact().value }}</div>
+
+      }
+      @default () {
+        <div class="label">{{ contact().label }}</div>
+        <div class="value">{{ contact().value }}</div>
+      }
+    }
+
+  </div>
+</div>
+

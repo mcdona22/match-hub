@@ -46,17 +46,16 @@ export class TeamService {
   }
 
   saveTeam(team: ITeam) {
-    const savedTeam = { ...team, contacts: [] };
-    console.log(`TEAM SERVICE: saving team`, savedTeam);
+    console.log(`TEAM SERVICE: saving team`, team);
     if (team.name == 'forest') {
       console.log(`Oops - forest`);
       return throwError(() => new Error('We dont like forest these days'));
     }
 
-    return from(this.teamsRepository.writeTeam(savedTeam)).pipe(
+    return from(this.teamsRepository.writeTeam(team)).pipe(
       map((response) => {
         console.log(`The response was good`, response);
-        return savedTeam;
+        return team;
       }),
     );
   }
