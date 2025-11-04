@@ -1,0 +1,27 @@
+<div class="standard-wrapper centred-max-width data-team-summary">
+  <div class="team-summary ">
+
+    <div class="id">{{ team().id }}</div>
+    <div class="name">{{ team().name }}</div>
+    <div class="post-code">{{ team().postCode | postcodeFormat }}</div>
+
+    <div class="league">League: {{ team()?.league ?? 'Not provided' }}</div>
+    @if (team().contacts.length) {
+
+      <div class="">
+        <hr/>
+        <div class="contacts-title">
+          Team Contacts
+        </div>
+        <div class="contacts">
+          @for (contact of team().contacts; track $index) {
+            <app-contact-tile class=" contact-tile" [contact]="contact"/>
+          }
+        </div>
+
+      </div>
+
+    }
+  </div>
+
+</div>

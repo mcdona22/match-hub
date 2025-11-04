@@ -62,8 +62,8 @@ describe('TeamsService', () => {
 
   it('should  resolve to a populated list where available after a pause', async () => {
     const teams: ITeam[] = [
-      { name: 'Forest', postCode: 'n2 2nf' },
-      { name: 'Man Utd', postCode: 'm2 4rd' },
+      { name: 'Forest', postCode: 'n2 2nf', contacts: [] },
+      { name: 'Man Utd', postCode: 'm2 4rd', contacts: [] },
     ];
     const { promise, resolve } = createControllablePromise();
     teamsRepositorySpy.readAllTeamsSpy.and.returnValue(promise);

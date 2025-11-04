@@ -49,7 +49,7 @@ describe('TeamsList', () => {
     const noTeamsCss = '.data-no-teams';
     const someTeamsCss = '.data-team-list';
 
-    teamsInput = [{ name: 'Forest', postCode: 'n2 2nf' }];
+    teamsInput = [{ name: 'Forest', postCode: 'n2 2nf', contacts: [] }];
     await setupComponent(teamsInput);
     const noTeams = debugElement.query(By.css(noTeamsCss));
     const someTeams = debugElement.query(By.css(someTeamsCss));

@@ -1,10 +1,10 @@
-<div class="standard-wrapper centred-max-width data-new-team">
+<div class="standard-wrapper  centred-max-width data-new-team">
 
-  <div [formGroup]="form" class="form">
+  <div [formGroup]="form" class="form ">
     <div class="form-title page-title">Add Team</div>
     <mat-form-field class="data-input-name">
       <mat-label>Team Name</mat-label>
-      <input (input)="onInput($event, maxName)" formControlName="name" matInput placeholder="team name">
+      <input (input)="onInput($event, name, maxName)" formControlName="name" matInput placeholder="team name">
       @if (!name.untouched && name.errors) {
         @if (name.errors!['required']) {
           <mat-error>Name is required</mat-error>
@@ -16,8 +16,20 @@
         @if (name.errors!['maxlength']) {
           <mat-error>Name must be less than {{ maxName }} characters</mat-error>
         }
+      }
 
 
+    </mat-form-field>
+
+
+    <mat-form-field class="data-input-league">
+      <mat-label>Home League</mat-label>
+      <input (input)="onInput($event, league, maxName)" formControlName="league" matInput placeholder="name of league">
+      @if (!league.untouched && league.errors) {
+
+        @if (name.errors!['maxlength']) {
+          <mat-error>League must be less than {{ maxName }} characters</mat-error>
+        }
       }
 
 
@@ -35,6 +47,34 @@
         }
       }
     </mat-form-field>
+    <button (click)="onAddContact()" mat-button>Add Contact Details</button>
+    <div class="contacts">
+      @for (contact of contactForms; track i; let i = $index; ) {
+        <div class="contact-form">
+
+
+          <div
+            [formGroup]="contact"
+            class="contact-form-row">
+
+            <mat-form-field>
+              <mat-label>Contact Label</mat-label>
+              <input matInput placeholder="contact description" formControlName="label">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Value</mat-label>
+              <input formControlName="value" matInput placeholder="email, phome, website or free text">
+            </mat-form-field>
+            <button mat-button (click)="onDeleteContactRow(i)">
+              X
+            </button>
+
+          </div>
+        </div>
+
+      }
+    </div>
 
 
     <button
@@ -46,19 +86,21 @@
 
 
   </div>
-  <p>
-
-    {{ form.value |json }}
-  </p>
-
-  <p>Name errors {{ name.errors |json }}</p>
-  <p> Post code errors {{ postCode.errors |json }}</p>
-  <p>
-    validity {{ form.valid }}
-  </p>
-  <p>
-    {{ form.value.postCode | postcodeFormat }}
-  </p>
 
 
+  <!--  <p>-->
+
+  <!--    {{ form.value |json }}-->
+  <!--  </p>-->
+
+  <!--  <p>Name errors {{ name.errors |json }}</p>-->
+  <!--  <p> Post code errors {{ postCode.errors |json }}</p>-->
+  <!--  <p>-->
+  <!--    validity {{ form.valid }}-->
+  <!--  </p>-->
+  <!--  <p>-->
+  <!--    {{ form.value.postCode | postcodeFormat }}-->
+  <!--  </p>-->
+
+  {{ formValue() | json }}
 </div>

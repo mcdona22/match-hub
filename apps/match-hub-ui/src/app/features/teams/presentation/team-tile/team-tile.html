@@ -1,9 +1,26 @@
 <div class="data-team-tile">
 
-  <mat-card>
-    <mat-card-title class="data-name">
-      {{ team().name }}
-    </mat-card-title>
-  </mat-card>
+  <div class="team-tile-wrapper rounded-border">
+    <div class="action">
+      <button
+        (click)="onNavigate(team().id ?? 'no id')"
+        mat-icon-button>
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+    <div class="name data-name"> {{ team().name }}
+    </div>
+  </div>
+
+  <!--  <mat-card>-->
+  <!--    <mat-card-title class="data-name">-->
+  <!--      {{ team().name }}-->
+  <!--    </mat-card-title>-->
+  <!--    <mat-card-actions>-->
+  <!--      <button mat-icon-button>-->
+  <!--        <mat-icon>search</mat-icon>-->
+  <!--      </button>-->
+  <!--    </mat-card-actions>-->
+  <!--  </mat-card>-->
 </div>
 

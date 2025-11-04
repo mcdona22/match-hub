@@ -18,4 +18,9 @@
 
 }
 
+.rounded-border {
+  border: solid 1px var(--mat-sys-secondary-fixed-dim);
+  border-radius: 12px;
+}
+
 

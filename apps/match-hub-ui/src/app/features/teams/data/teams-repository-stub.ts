@@ -3,29 +3,47 @@ import { ITeam } from './i-team';
 import { ITeamsRepository } from './I-teams-repository';
 
 const teamsKey = 'match-hub.teams';
+const Premier = 'Premier';
 
 export const data: ITeam[] = [
-  { id: '1', name: 'Nottingham Forest', postCode: 'n12nf' },
-  { id: '2', name: 'Man United', postCode: 'm12mu' },
-  { id: '3', name: 'Sunderland', postCode: 'su31sm' },
-  { id: '4', name: 'Aston Villa', postCode: 'b123fa' },
-  { id: '5', name: 'Arsenal', postCode: 'ne123xy' },
-  { id: '6', name: 'Liverpool', postCode: 'lv45gg' },
+  { name: 'Nottingham Forest', postCode: 'n12nf', contacts: [] },
+  { name: 'Man United', postCode: 'm12mu', league: Premier, contacts: [] },
+  { name: 'Sunderland', postCode: 'su31sm', league: Premier, contacts: [] },
+  { name: 'Aston Villa', postCode: 'b123fa', league: Premier, contacts: [] },
+  { name: 'Arsenal', postCode: 'ne123xy', league: Premier, contacts: [] },
+  { name: 'Liverpool', postCode: 'lv45gg', league: Premier, contacts: [] },
 ];
 
 @Injectable({
   providedIn: 'root',
 })
 export class TeamsRepositoryStub implements ITeamsRepository {
-  delay = 750;
+  delay = 120;
 
   constructor() {
     console.log(`In the constructor`);
     const localData = localStorage.getItem(teamsKey);
     if (!localData) {
-      console.log(`Data is not set.  Saving what starter data`, data);
-      localStorage.setItem(teamsKey, JSON.stringify(data));
+      const updated = data.map((t) => ({ ...t, id: this.randomKey() }));
+      updated.push({
+        id: 'test',
+        name: 'Test Team FC',
+        postCode: 'lv45gg',
+        league: 'Test League',
+        contacts: [
+          { label: 'Manager', value: 'manager@test.com', contactType: 'EMAIL' },
+        ],
+      });
+      console.log(`Data is not set.  Saving what starter data`, updated);
+      localStorage.setItem(teamsKey, JSON.stringify(updated));
     }
+  }
+
+  async readTeam(id: string): Promise<ITeam> {
+    // const team = { id, name: 'Colchester United', postCode: 'hd22su' } as ITeam;
+    const team = this.storedTeams().find((team) => team.id === id);
+    await new Promise((resolve) => setTimeout(resolve, this.delay));
+    return team!;
   }
 
   async readAllTeams(): Promise<ITeam[]> {
@@ -36,9 +54,11 @@ export class TeamsRepositoryStub implements ITeamsRepository {
   }
 
   async writeTeam(team: ITeam): Promise<boolean> {
+    const updatedTeam = { ...team, id: this.randomKey() };
     console.log(`about to write team`, team);
+
     const storedTeams = this.storedTeams();
-    const newTeams = [...storedTeams, team];
+    const newTeams = [...storedTeams, updatedTeam];
     console.log(`REPO - writing some teams`, newTeams);
     localStorage.setItem(teamsKey, JSON.stringify(newTeams));
     await new Promise((resolve) => setTimeout(resolve, this.delay));
@@ -50,4 +70,7 @@ export class TeamsRepositoryStub implements ITeamsRepository {
     const localData = localStorage.getItem(teamsKey);
     return JSON.parse(localData!) as ITeam[];
   }
+
+  private randomKey = () =>
+    Date.now().toString() + Math.floor(Math.random() * 1000).toString();
 }
