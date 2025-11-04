@@ -1,6 +1,5 @@
 import { Component, inject, input } from '@angular/core';
 import { ITeam } from '../../data/i-team';
-import { MatCard, MatCardActions, MatCardTitle } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { Router } from '@angular/router';
@@ -8,7 +7,7 @@ import { teamsPath } from '../../../../app.routes';
 
 @Component({
   selector: 'app-team-tile',
-  imports: [MatCard, MatCardTitle, MatCardActions, MatButtonModule, MatIcon],
+  imports: [MatButtonModule, MatIcon],
   templateUrl: './team-tile.html',
   styleUrl: './team-tile.scss',
 })

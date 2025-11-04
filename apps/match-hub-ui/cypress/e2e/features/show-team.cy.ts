@@ -1,5 +1,5 @@
 describe('Show single team', () => {
-  const teamId = 'xyz';
+  const teamId = 'test';
   beforeEach(() => {
     cy.visit(`/teams/${teamId}`);
   });

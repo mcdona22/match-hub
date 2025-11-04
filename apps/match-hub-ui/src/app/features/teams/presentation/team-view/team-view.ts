@@ -1,13 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AsyncPipe } from '@angular/common';
 import { TeamService } from '../../application/team-service';
-import { PostcodeFormatPipe } from '../../../common/postCode.pipe';
 import { TeamSummaryView } from '../team-summary-view/team-summary-view';
 
 @Component({
   selector: 'app-team-view',
-  imports: [AsyncPipe, PostcodeFormatPipe, TeamSummaryView],
+  imports: [TeamSummaryView],
   templateUrl: './team-view.html',
   styleUrl: './team-view.scss',
 })

@@ -46,7 +46,7 @@ export class TeamService {
   }
 
   saveTeam(team: ITeam) {
-    const savedTeam = { ...team, id: this.randomKey() };
+    const savedTeam = { ...team };
     console.log(`TEAM SERVICE: saving team`, savedTeam);
     if (team.name == 'forest') {
       console.log(`Oops - forest`);

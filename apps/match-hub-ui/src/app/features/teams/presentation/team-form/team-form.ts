@@ -8,10 +8,8 @@ import {
 import { MatInput } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { finalize, max } from 'rxjs';
-import { JsonPipe } from '@angular/common';
+import { finalize } from 'rxjs';
 import { postCodeValidator } from '../../../common/post-code-validator';
-import { PostcodeFormatPipe } from '../../../common/postCode.pipe';
 import { TeamService } from '../../application/team-service';
 import { ITeam } from '../../data/i-team';
 import { Router } from '@angular/router';
@@ -20,14 +18,7 @@ import { teamsPath } from '../../../../app.routes';
 
 @Component({
   selector: 'app-team-form',
-  imports: [
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInput,
-    MatButtonModule,
-    JsonPipe,
-    PostcodeFormatPipe,
-  ],
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInput, MatButtonModule],
   templateUrl: './team-form.html',
   styleUrl: './team-form.scss',
 })
@@ -52,27 +43,35 @@ export class TeamForm {
     postCode: new FormControl('', {
       validators: [Validators.required, postCodeValidator()],
     }),
+    league: new FormControl('', {
+      validators: [Validators.maxLength(this.maxName)],
+    }),
   });
-  protected readonly max = max;
+
+  // protected readonly max = max;
 
   get name() {
     return this.form.controls.name;
+  }
+
+  get league() {
+    return this.form.controls.league;
   }
 
   get postCode() {
     return this.form.controls.postCode;
   }
 
-  onInput(_: Event, maxLength: number) {
+  onInput(_: Event, control: FormControl, maxLength: number) {
     // console.log(`event`, this.clubName.value);
-    const content = this.name.value!;
+    const content = control.value!;
     if (content.length > maxLength) {
-      this.name.setValue(content.substring(0, maxLength));
+      control.setValue(content.substring(0, maxLength));
     }
   }
 
   onTeamCreate() {
-    const { name, postCode } = this.form.value;
+    const { name, postCode, league } = this.form.value;
     if (this.form.invalid) {
       console.log(`Form not valid - not submitting`);
       return;
@@ -83,8 +82,9 @@ export class TeamForm {
 
     this.teamService
       .saveTeam({
-        name,
+        name: name?.trim(),
         postCode: strippedPostCode,
+        league: league?.trim(),
       } as ITeam)
       .pipe(
         finalize(() => {
