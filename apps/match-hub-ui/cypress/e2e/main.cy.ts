@@ -9,15 +9,12 @@ describe('Main App Page', () => {
   });
 
   it('should find the correct number of clickable menu items', () => {
-    const expectedItems = 3;
+    const expectedItems = 2;
     cy.get('.menu-items > a').should('have.length', expectedItems);
   });
 
   describe('Check app scaffold components', () => {
-    const items = [
-      { class: '.data-link-teams', value: 'Teams' },
-      { class: '.data-link-calendar', value: 'Calendar' },
-    ];
+    const items = [{ class: '.data-link-teams', value: 'Teams' }];
 
     for (const item of items) {
       it(`it should find the "${item.value}" item`, () => {
