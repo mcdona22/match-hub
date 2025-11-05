@@ -13,7 +13,7 @@ export class TeamsRepositoryHttp implements ITeamsRepository {
   readAllTeams(): Observable<ITeam[]> {
     const response$ = this.http.get<ITeam[]>(TEAMS_URL);
     return response$.pipe(
-      tap((teams: ITeam[]) => console.log(`http teams`, teams)),
+      // tap((teams: ITeam[]) => console.log(`http teams`, teams)),
       first(),
     );
   }
