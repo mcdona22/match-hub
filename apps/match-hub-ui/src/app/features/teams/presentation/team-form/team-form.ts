@@ -10,7 +10,6 @@ import {
 import { MatInput } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { finalize } from 'rxjs';
 import { postCodeValidator } from '../../../common/post-code-validator';
 import { TeamService } from '../../application/team-service';
 import { ITeam } from '../../data/i-team';
@@ -108,7 +107,6 @@ export class TeamForm {
     }
 
     const strippedPostCode = postCode?.toLowerCase().replace(/\s/g, '');
-    this.loadingService.loadingStart();
 
     const contacts: IContact[] = this.form.value.contacts.map(this.mapContact);
     console.log(`Mapped Contacts`, contacts);
@@ -121,12 +119,12 @@ export class TeamForm {
     } as ITeam);
 
     response$
-      .pipe(
-        finalize(() => {
-          console.log(`Turning the spinner off`);
-          this.loadingService.loadingStop();
-        }),
-      )
+      .pipe
+      // finalize(() => {
+      //   console.log(`Turning the spinner off`);
+      //   this.loadingService.loadingStop();
+      // }),
+      ()
       .subscribe({
         next: (team) => {
           console.log(`Team Created`, team);
