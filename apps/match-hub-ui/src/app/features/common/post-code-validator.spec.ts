@@ -1,7 +1,7 @@
 import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
 import { postCodeValidator } from './post-code-validator';
 
-fdescribe('PostCodeValidator', () => {
+describe('PostCodeValidator', () => {
   let validator: ValidatorFn;
   beforeEach(() => {
     validator = postCodeValidator();

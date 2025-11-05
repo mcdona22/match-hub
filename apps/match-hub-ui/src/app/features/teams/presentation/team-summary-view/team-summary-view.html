@@ -5,7 +5,7 @@
     <div class="name">{{ team().name }}</div>
     <div class="post-code">{{ team().postCode | postcodeFormat }}</div>
 
-    <div class="league">League: {{ team()?.league ?? 'Not provided' }}</div>
+    <div class="league">League: {{ team().league ?? 'Not provided' }}</div>
     @if (team().contacts.length) {
 
       <div class="">

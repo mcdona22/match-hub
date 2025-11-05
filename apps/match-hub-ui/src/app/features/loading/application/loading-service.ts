@@ -1,22 +1,19 @@
-import { Injectable, Signal, signal, WritableSignal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoadingService {
-  private isLoadingSignal: WritableSignal<boolean> = signal(false);
-  readonly isLoading: Signal<boolean> = this.isLoadingSignal.asReadonly();
+  private loadingClients = signal(0);
+  isLoading = computed(() => this.loadingClients() > 0);
 
+  // incrementing and decrementing means we can have multiple
+  // clients use tbis rather than last in wins
   loadingStart(): void {
-    this.setLoading(true);
+    this.loadingClients.set(this.loadingClients() + 1);
   }
 
   loadingStop(): void {
-    this.setLoading(false);
-  }
-
-  private setLoading(flag: boolean): void {
-    console.log(`Setting loading to ${flag}`);
-    this.isLoadingSignal.set(flag);
+    this.loadingClients.set(this.loadingClients() - 1);
   }
 }

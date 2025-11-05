@@ -10,7 +10,6 @@ import {
 import { MatInput } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { finalize } from 'rxjs';
 import { postCodeValidator } from '../../../common/post-code-validator';
 import { TeamService } from '../../application/team-service';
 import { ITeam } from '../../data/i-team';
@@ -19,7 +18,6 @@ import { LoadingService } from '../../../loading/application/loading-service';
 import { teamsPath } from '../../../../app.routes';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { JsonPipe } from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
 import { determineContactType, IContact } from '../../data/i-contact';
 
 @Component({
@@ -30,7 +28,6 @@ import { determineContactType, IContact } from '../../data/i-contact';
     MatInput,
     MatButtonModule,
     JsonPipe,
-    MatIcon,
   ],
   standalone: true,
   templateUrl: './team-form.html',
@@ -110,24 +107,24 @@ export class TeamForm {
     }
 
     const strippedPostCode = postCode?.toLowerCase().replace(/\s/g, '');
-    this.loadingService.loadingStart();
 
     const contacts: IContact[] = this.form.value.contacts.map(this.mapContact);
     console.log(`Mapped Contacts`, contacts);
 
-    this.teamService
-      .saveTeam({
-        name: name?.trim(),
-        postCode: strippedPostCode,
-        league: league?.trim(),
-        contacts,
-      } as ITeam)
-      .pipe(
-        finalize(() => {
-          console.log(`Turning the spinner off`);
-          this.loadingService.loadingStop();
-        }),
-      )
+    const response$ = this.teamService.saveTeam({
+      name: name?.trim(),
+      postCode: strippedPostCode,
+      league: league?.trim(),
+      contacts,
+    } as ITeam);
+
+    response$
+      .pipe
+      // finalize(() => {
+      //   console.log(`Turning the spinner off`);
+      //   this.loadingService.loadingStop();
+      // }),
+      ()
       .subscribe({
         next: (team) => {
           console.log(`Team Created`, team);
