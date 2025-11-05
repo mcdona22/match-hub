@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ITeam } from './i-team';
 import { ITeamsRepository } from './I-teams-repository';
+import { Observable } from 'rxjs';
 
 const teamsKey = 'match-hub.teams';
 const Premier = 'Premier';
@@ -39,31 +40,38 @@ export class TeamsRepositoryStub implements ITeamsRepository {
     }
   }
 
-  async readTeam(id: string): Promise<ITeam> {
+  readTeam(id: string): Observable<ITeam> {
     // const team = { id, name: 'Colchester United', postCode: 'hd22su' } as ITeam;
-    const team = this.storedTeams().find((team) => team.id === id);
-    await new Promise((resolve) => setTimeout(resolve, this.delay));
-    return team!;
+
+    throw new Error('Method not implemented.');
+
+    // const team = this.storedTeams().find((team) => team.id === id);
+    // await new Promise((resolve) => setTimeout(resolve, this.delay));
+    // return team!;
   }
 
-  async readAllTeams(): Promise<ITeam[]> {
-    console.log(`initiating fetch in repo`);
-    await new Promise((resolve) => setTimeout(resolve, this.delay));
-    console.log(`readAllTeams complete after ${this.delay} ms`);
-    return this.storedTeams();
+  readAllTeams(): Observable<ITeam[]> {
+    throw new Error('Method not implemented.');
+
+    // console.log(`initiating fetch in repo`);
+    // await new Promise((resolve) => setTimeout(resolve, this.delay));
+    // console.log(`readAllTeams complete after ${this.delay} ms`);
+    // return this.storedTeams();
   }
 
-  async writeTeam(team: ITeam): Promise<boolean> {
-    const updatedTeam = { ...team, id: this.randomKey() };
-    console.log(`about to write team`, team);
+  writeTeam(team: ITeam): Observable<ITeam> {
+    throw new Error('Method not implemented.');
 
-    const storedTeams = this.storedTeams();
-    const newTeams = [...storedTeams, updatedTeam];
-    console.log(`REPO - writing some teams`, newTeams);
-    localStorage.setItem(teamsKey, JSON.stringify(newTeams));
-    await new Promise((resolve) => setTimeout(resolve, this.delay));
-
-    return Promise.resolve(true);
+    // const updatedTeam = { ...team, id: this.randomKey() };
+    // console.log(`about to write team`, team);
+    //
+    // const storedTeams = this.storedTeams();
+    // const newTeams = [...storedTeams, updatedTeam];
+    // console.log(`REPO - writing some teams`, newTeams);
+    // localStorage.setItem(teamsKey, JSON.stringify(newTeams));
+    // await new Promise((resolve) => setTimeout(resolve, this.delay));
+    //
+    // return Promise.resolve(true);
   }
 
   private storedTeams() {

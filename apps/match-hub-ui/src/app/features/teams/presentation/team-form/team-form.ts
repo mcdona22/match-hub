@@ -19,7 +19,6 @@ import { LoadingService } from '../../../loading/application/loading-service';
 import { teamsPath } from '../../../../app.routes';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { JsonPipe } from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
 import { determineContactType, IContact } from '../../data/i-contact';
 
 @Component({
@@ -30,7 +29,6 @@ import { determineContactType, IContact } from '../../data/i-contact';
     MatInput,
     MatButtonModule,
     JsonPipe,
-    MatIcon,
   ],
   standalone: true,
   templateUrl: './team-form.html',
@@ -115,13 +113,14 @@ export class TeamForm {
     const contacts: IContact[] = this.form.value.contacts.map(this.mapContact);
     console.log(`Mapped Contacts`, contacts);
 
-    this.teamService
-      .saveTeam({
-        name: name?.trim(),
-        postCode: strippedPostCode,
-        league: league?.trim(),
-        contacts,
-      } as ITeam)
+    const response$ = this.teamService.saveTeam({
+      name: name?.trim(),
+      postCode: strippedPostCode,
+      league: league?.trim(),
+      contacts,
+    } as ITeam);
+
+    response$
       .pipe(
         finalize(() => {
           console.log(`Turning the spinner off`);
