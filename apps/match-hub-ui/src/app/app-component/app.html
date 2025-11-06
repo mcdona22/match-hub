@@ -1,5 +1,6 @@
 <mat-sidenav-container class="example-container">
   <mat-sidenav
+
     [opened]="opened()"
     mode="over"
     position="end">
@@ -8,8 +9,7 @@
 
     <div class="menu-options">
       @for (option of toolBarOptions; track $index) {
-        <div class="menu-option ">
-
+        <div class="menu-option data-button-{{option.dataTag}}">
           <button (click)="onNavigate(option.path)" class="" mat-button> {{ option.caption }}</button>
         </div>
       }
@@ -32,7 +32,9 @@
         }
 
 
-        <button (click)="toggleOpened()" mat-icon-button>
+        <button (click)="toggleOpened()"
+                class="data-menu-toggle"
+                mat-icon-button>
           <mat-icon>menu</mat-icon>
         </button>
       </div>

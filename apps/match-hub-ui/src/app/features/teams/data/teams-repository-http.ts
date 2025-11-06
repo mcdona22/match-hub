@@ -20,7 +20,6 @@ export class TeamsRepositoryHttp implements ITeamsRepository {
 
   writeTeam(team: ITeam): Observable<ITeam> {
     const response$ = this.http.post<ITeam>(TEAMS_URL, team);
-
     return response$.pipe(
       tap((team) => console.log(`created team`, team)),
       first(),
