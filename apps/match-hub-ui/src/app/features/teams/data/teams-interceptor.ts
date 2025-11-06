@@ -10,9 +10,7 @@ export const teamsInterceptor: HttpInterceptorFn = (req, next) => {
   const isTeamsUrl = req.url.includes(TEAMS_URL);
   const regex = /\/api\/teams(?:\/(.+?))?(?:\?|$)/;
   const match = req.url.match(regex);
-  console.log(`match`, match?.length);
   match?.forEach((match) => console.log(`Inner match`, match));
-  console.log(`match`, match);
 
   if (match && !match[1] && req.method == 'GET') {
     console.log(`teamsInterceptor: intercepted ${req.method}`, req.url);
